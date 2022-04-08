@@ -306,7 +306,7 @@ const dayWindow=()=>{
         components[i] = temp;
       }
     }
-    if(sortStyle==time){
+    else if(sortStyle=='time'){
       for(let x = 0; x < user.getTasks().length; x++){
         let component = [];
         if(user.getTasks()[x] instanceof Task && user.getTasks()){
@@ -331,6 +331,21 @@ const dayWindow=()=>{
         components[minidx] = components[i];
         components[i] = temp;
       }
+    } else {
+      for(let x = 0; x < user.getTasks().length; x++){
+        let component = [];
+        if(user.getTasks()[x] instanceof Task && user.getTasks()){
+          if(user.getTasks()[x].getYear() == year && user.getTasks()[x].getMonth() == focusedMonth+1 && user.getTasks()[x].getDay() == focusedDay){
+            console.log('testest???');
+            component.push(<label id={x} className='Year' style={{textAlign: 'center' , top: '15%', left: '5%'}}>{"Date: "+user.getTasks()[x].getDate()}</label>);
+            component.push(<label id={x} className='Year' style={{textAlign: 'center' , top: '25%', left: '5%'}}>{"Time: "+user.getTasks()[x].getTime()}</label>);
+            component.push(<label id={x} className='Year' style={{textAlign: 'center' , top: '35%', left: '5%'}}>{"Title: "+user.getTasks()[x].getTitle()}</label>);
+            component.push(<label id={x} className='Year' style={{textAlign: 'center' , top: '45%', left: '5%'}}>{"Description: "+user.getTasks()[x].getDescription()}</label>);
+            component.push(<label id={x} className='Year' style={{textAlign: 'center' , top: '55%', left: '5%'}}>{"Priority: "+user.getTasks()[x].getPrio()}</label>);
+            components.push(component);
+          }
+        }
+      }
     }
     return components;
   }
@@ -354,11 +369,15 @@ const dayWindow=()=>{
           <button style={{fontSize: '6em', position: 'absolute', left: '0%'}} onClick = {(e)=>{
             setSortStyle('prio');
           }}> ☆</button>
-          <button style={{fontSize: '6em', position: 'absolute', left: '10%'}} onClick = {(e)=>{
+          <button style={{fontSize: '3em', position: 'absolute', left: '23%'}} onClick = {(e)=>{
+            setSortStyle('');
+          }}>Creation</button>
+          <button style={{fontSize: '6em', position: 'absolute', left: '9.3%'}} onClick = {(e)=>{
             setSortStyle('time');
-          }}> 🕛</button>
+          }}>🕛</button>
       </div>
     </div>
   );
 }
+//🕛
 export default App;
